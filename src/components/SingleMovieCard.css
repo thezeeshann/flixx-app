@@ -1,0 +1,35 @@
+img{
+    width: 100%;
+    height: 100%;
+}
+.text-muted{
+    color: var(--color-secondary);
+}
+li{
+    list-style-type: none;
+}
+.companies-countries{
+    display: flex;
+    flex-direction: column;
+}
+.movie-heading{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 5px;
+}
+.movie-heading h5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.companies,.countries{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.list-group{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
