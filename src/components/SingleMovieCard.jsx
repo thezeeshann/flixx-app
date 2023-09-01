@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const SingleMovieCard = ({ movie }) => {
   return (
-    <div id="movie-details">
-      <div key={movie.id} className="details-top">
+    <div key={movie.id} id="movie-details">
+      <div className="details-top">
         <div>
           <img
             src={

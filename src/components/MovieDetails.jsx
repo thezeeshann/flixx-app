@@ -3,13 +3,13 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "./MovieDetails.css";
 import Spinner from "./Spinner";
-import MovieContext from "../context/movieContext";
 import SingleMovieCard from "./SingleMovieCard";
+import AppContext from "../context/movieContext";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const { isLoading, setIsLoading, API_URL, API_KEY } =
-    useContext(MovieContext);
+    useContext(AppContext);
   const [singleMovie, setSingleMovie] = useState({});
   const isLoadingSpinner = isLoading === true;
 
@@ -17,7 +17,7 @@ const MovieDetails = () => {
     async function fetchSingleMovieData() {
       setIsLoading(true);
       try {
-        const res = await axios.get(`${API_URL}${movieId}?api_key=${API_KEY}`);
+        const res = await axios.get(`${API_URL[0]}${movieId}?api_key=${API_KEY}`);
         setSingleMovie(res.data);
       } catch (error) {
         console.log(error);
@@ -26,7 +26,7 @@ const MovieDetails = () => {
       }
     }
     fetchSingleMovieData();
-  }, [movieId, setIsLoading, API_URL, API_KEY]);
+  }, [movieId]);
 
   return (
     <section className="container">

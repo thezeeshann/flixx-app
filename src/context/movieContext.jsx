@@ -1,44 +1,78 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-const MovieContext = createContext();
+const AppContext = createContext();
 
-export const MovieContextProvider = ({ children }) => {
+export const AppContextProvider = ({ children }) => {
+
+  const API_URL = ["https://api.themoviedb.org/3/movie/","https://api.themoviedb.org/3/tv/"];
+  const KEY_WORDS = ["popular"];
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const API_URL = "https://api.themoviedb.org/3/movie/";
-  const KEY_WORDS = "popular";
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  const [tvShow,setTvShow] = useState([])
+  const [searchQuery, setSearchQuery] = useState("");
+
+
   const fetchMovieData = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${API_URL}${KEY_WORDS}?api_key=${API_KEY}`
-      );
+        `${API_URL[0]}${KEY_WORDS}?api_key=${API_KEY}`);
       setMovies(response.data.results);
       // console.log(response.data.results)
     } catch (error) {
       console.log("Something wrong while fetching the data", error);
+    } finally{
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
+
+  const fetchTvShowData = async ()=>{
+    setIsLoading(true)
+    try {
+      const response = await axios.get(`${API_URL[1]}${KEY_WORDS}?api_key=${API_KEY}`)
+      setTvShow(response.data.results)
+      // console.log(response.data.results)
+    } catch (error) {
+      console.log("Something wrong while fetching the data", error);
+    } finally{
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
     fetchMovieData();
+    fetchTvShowData()
   }, []);
 
+  const searchData =
+    searchQuery.length > 0
+      ? movies.filter((movie) => {
+          `${movie.original_title} ${movie.title}`
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+        })
+      : movies;
+
   const data = {
-    isLoading,
-    setIsLoading,
-    fetchMovieData,
-    movies,
-    setMovies,
     API_URL,
     API_KEY,
     KEY_WORDS,
+    isLoading,
+    setIsLoading,
+    fetchMovieData,
+    movies: searchData,
+    setMovies,
+    tvShow,
+    setTvShow,
+    fetchTvShowData,
+    searchQuery,
+    setSearchQuery,
   };
 
-  return <MovieContext.Provider value={data}>{children}</MovieContext.Provider>;
+  return <AppContext.Provider value={data}>{children}</AppContext.Provider>;
 };
 
-export default MovieContext;
+export default AppContext;
