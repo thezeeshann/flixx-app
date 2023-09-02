@@ -1,6 +1,6 @@
-import "./SingleMovieCard.css";
 import image from "../images/image.jpg";
 import { Link } from "react-router-dom";
+import "./SingleMovieCard.css"
 
 const SingleMovieCard = ({ movie }) => {
   return (
@@ -45,7 +45,7 @@ const SingleMovieCard = ({ movie }) => {
               ))}
             </ul>
           </div>
-          <Link to={movie.homepage} className="btn">
+          <Link to={movie.homepage} target="_blank" className="btn">
             Visit Movie Homepage
           </Link>
         </div>

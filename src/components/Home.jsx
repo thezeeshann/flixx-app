@@ -1,5 +1,5 @@
 import Movie from "./Movie";
-import Search from "./Search";
+import Search from "./common/Search";
 import NowPlaying from "./NowPlaying";
 import "./Home.css";
 

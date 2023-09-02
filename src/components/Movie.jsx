@@ -2,8 +2,8 @@ import { useContext } from "react";
 import {Link} from "react-router-dom"
 import movieImage from "../images/image.jpg";
 import "./Movie.css";
-import Spinner from "./Spinner";
-import AppContext from "../context/movieContext";
+import Spinner from "./common/Spinner";
+import AppContext from "../context/AppContext";
 
 const Movie = () => {
   const { isLoading, movies } = useContext(AppContext);

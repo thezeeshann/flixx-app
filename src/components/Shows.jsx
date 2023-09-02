@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import {Link} from "react-router-dom"
-import AppContext from "../context/movieContext";
-import Search from "./Search";
+import AppContext from "../context/AppContext";
+import Search from "./common/Search";
 import NowPlaying from "./NowPlaying";
 import movieImage from "../images/image.jpg";
-import Spinner from "./Spinner";
+import Spinner from "./common/Spinner";
 
 const Shows = () => {
   const { isLoading,tvShow } = useContext(AppContext);
@@ -23,7 +23,7 @@ const Shows = () => {
         ) : (
           tvShow.map((show) => (
             <div key={show.id} className="card">
-              <Link to={`/movie-details/${show.id}`}>
+              <Link to={`/shows-details/${show.id}`}>
               {/* <a href="movie-details.html?id=1"> */}
                 <img
                   src={show.poster_path ? `https://image.tmdb.org/t/p/w500/${show.poster_path}` : movieImage }

@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "./MovieDetails.css";
-import Spinner from "./Spinner";
+import Spinner from "./common/Spinner";
 import SingleMovieCard from "./SingleMovieCard";
-import AppContext from "../context/movieContext";
+import AppContext from "../context/AppContext";
 
 const MovieDetails = () => {
   const { movieId } = useParams();

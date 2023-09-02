@@ -1,10 +1,10 @@
 import { FaSearch } from "react-icons/fa";
 import { useContext } from "react";
-import MovieContext from "../context/movieContext";
+import AppContext from "../../context/AppContext"
 import "./Search.css"
 
 const Search = () => {
-  const { searchQuery, setSearchQuery } = useContext(MovieContext);
+  const { searchQuery, setSearchQuery } = useContext(AppContext);
 
   return (
     <section className="search">
