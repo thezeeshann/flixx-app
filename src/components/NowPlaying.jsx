@@ -1,21 +1,22 @@
 import "./NowPlaying.css"
-
+import image from "../images/image.jpg"
+import { FaStar } from "react-icons/fa";
 
 const NowPlaying = () => {
   return (
     <section className="now-playing">
         <h2>Now Playing</h2>
         <div className="swiper">
-          {/* <div className="swiper-wrapper">
+          <div className="swiper-wrapper">
             <div className="swiper-slide">
             <a href="movie-details.html?id=1">
-              <img src="./images/no-image.jpg" alt="Movie Title" />
+              <img src={image} alt="Movie Title" />
             </a>
             <h4 className="swiper-rating">
-              <i className="fas fa-star text-secondary"></i> 8 / 10
+              <span><FaStar/></span>  8 / 10
             </h4>
           </div>
-          </div> */}
+          </div>
         </div>
       </section>
   )

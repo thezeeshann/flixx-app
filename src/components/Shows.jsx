@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import {Link} from "react-router-dom"
 import AppContext from "../context/AppContext";
-import Search from "./common/Search";
-import NowPlaying from "./NowPlaying";
 import movieImage from "../images/image.jpg";
 import Spinner from "./common/Spinner";
 
@@ -10,10 +8,6 @@ const Shows = () => {
   const { isLoading,tvShow } = useContext(AppContext);
   return (
     <main>
-    {/* <!-- Now Playing Section --> */}
-    <NowPlaying />
-    {/* <!-- Search Movies --> */}
-    <Search />
     {/* shows */}
     <section className="container">
       <h2>Popular TV Shows</h2>
