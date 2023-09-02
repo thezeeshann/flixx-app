@@ -8,7 +8,7 @@ export const AppContextProvider = ({ children }) => {
     "https://api.themoviedb.org/3/movie/",
     "https://api.themoviedb.org/3/tv/",
   ];
-  const KEY_WORDS = ["popular", "top_rated", "upcoming"];
+  const KEY_WORDS = ["popular", "top_rated", "upcoming", "on_the_air"];
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -17,10 +17,14 @@ export const AppContextProvider = ({ children }) => {
   // const [topRated,setTopRated] = useState([])
   // const [upcoming,setUpcoming] = useState([])
   const [movieCategory, setMovieCategory] = useState({
-    topRated: 0,
-    upcoming: 0,
+    topRated: [],
+    upcoming: [],
   });
 
+  const [tvShowCategory, setTvShowCategory] = useState({
+    topRated: [],
+    onTheAir: [],
+  });
   // const topRatedMovie = movieCategory.topRated;
   // const upComingMovie = movieCategory.upcoming;
   // console.log("TOP",movieCategory.topRated)
@@ -81,11 +85,38 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  const fetchTvShowCategory = async (keyword) => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get(`${API_URL[1]}${keyword}?api_key=${API_KEY}`);
+      const categoryData = res.data.results;
+      if (keyword === "top_rated") {
+        setTvShowCategory((prev) => ({
+          ...prev,
+          topRated: categoryData,
+        }));
+      }
+      if (keyword === "on_the_air") {
+        setTvShowCategory((prev) => ({
+          ...prev,
+          onTheAir: categoryData,
+        }));
+      }
+      // console.log(res.data.results)
+    } catch (error) {
+      console.log("Something wrong while fetching the category data", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchMovieData();
     fetchTvShowData();
     fetchMoviesCategory(KEY_WORDS[1]);
     fetchMoviesCategory(KEY_WORDS[2]);
+    fetchTvShowCategory(KEY_WORDS[1]);
+    fetchTvShowCategory(KEY_WORDS[3]);
   }, []);
 
   const searchDataMovie =
@@ -119,6 +150,8 @@ export const AppContextProvider = ({ children }) => {
     setTvShow,
     topRatedMovie: movieCategory.topRated,
     upComingMovie: movieCategory.upcoming,
+    topRatedTvShow: tvShowCategory.topRated,
+    onTheAir: tvShowCategory.onTheAir,
     fetchTvShowData,
     searchQuery,
     setSearchQuery,
