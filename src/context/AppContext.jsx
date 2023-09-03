@@ -8,26 +8,28 @@ export const AppContextProvider = ({ children }) => {
     "https://api.themoviedb.org/3/movie/",
     "https://api.themoviedb.org/3/tv/",
   ];
-  const KEY_WORDS = ["popular", "top_rated", "upcoming", "on_the_air"];
+  const KEY_WORDS = [
+    "popular",
+    "top_rated",
+    "upcoming",
+    "on_the_air",
+    "now_playing",
+  ];
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [tvShow, setTvShow] = useState([]);
-  // const [topRated,setTopRated] = useState([])
-  // const [upcoming,setUpcoming] = useState([])
   const [movieCategory, setMovieCategory] = useState({
     topRated: [],
     upcoming: [],
+    now_playing: [],
   });
 
   const [tvShowCategory, setTvShowCategory] = useState({
     topRated: [],
     onTheAir: [],
   });
-  // const topRatedMovie = movieCategory.topRated;
-  // const upComingMovie = movieCategory.upcoming;
-  // console.log("TOP",movieCategory.topRated)
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -78,6 +80,12 @@ export const AppContextProvider = ({ children }) => {
           upcoming: categoryData,
         }));
       }
+      if (keyword === "now_playing") {
+        setMovieCategory((prev) => ({
+          ...prev,
+          now_playing: categoryData,
+        }));
+      }
     } catch (error) {
       console.log("Something wrong while fetching the category data", error);
     } finally {
@@ -115,6 +123,7 @@ export const AppContextProvider = ({ children }) => {
     fetchTvShowData();
     fetchMoviesCategory(KEY_WORDS[1]);
     fetchMoviesCategory(KEY_WORDS[2]);
+    fetchMoviesCategory(KEY_WORDS[4]);
     fetchTvShowCategory(KEY_WORDS[1]);
     fetchTvShowCategory(KEY_WORDS[3]);
   }, []);
@@ -137,6 +146,7 @@ export const AppContextProvider = ({ children }) => {
         )
       : tvShow;
 
+  
   const data = {
     API_URL,
     API_KEY,
@@ -150,11 +160,14 @@ export const AppContextProvider = ({ children }) => {
     setTvShow,
     topRatedMovie: movieCategory.topRated,
     upComingMovie: movieCategory.upcoming,
+    nowPlayingMovie: movieCategory.now_playing,
     topRatedTvShow: tvShowCategory.topRated,
     onTheAir: tvShowCategory.onTheAir,
     fetchTvShowData,
     searchQuery,
     setSearchQuery,
+    searchDataMovie,
+    searchDataShow
   };
 
   return <AppContext.Provider value={data}>{children}</AppContext.Provider>;
