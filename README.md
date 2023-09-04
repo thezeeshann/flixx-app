@@ -1,8 +1,9 @@
-# React + Vite
+# Flixx Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Movie and Show info application built with React js that uses version 3 of the  [TMDB API](https://developers.themoviedb.org/3)
 
-Currently, two official plugins are available:
+This includes the most popular movies and TV shows with detailed pages, a search box for movies, and shows with a slider for movies currently in theaters. The slider uses the [Swiper](https://swiperjs.com) library.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎞
+
+![1](https://github.com/thezeeshann/flixx-app/assets/88139550/20b3ac2c-0e8b-4915-a3c7-e67fb0323c86)
